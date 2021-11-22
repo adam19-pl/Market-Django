@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Items Page
+{% endblock %}
+
+
+{% block pageheader %}
+    <h2 class=" mb-5 mt-3 text-center" >Witaj na stronie z rzeczami ! </h2>
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for item in items%}
+        {% include 'main/includes/items_modals.html'%}
+            <tr>
+                <th scope="row">{{ item.pk }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>
+                        <img alt="image" src="{{ item.image_url }}" style="width:80px; height: 80px; ">
+                    </td>
+                    <td>{{ item.price}} $</td>
+                    <td>
+                            <button type="button" class="btn btn-outline-primary"
+                                data-toggle="modal" data-target="#Modal-MoreInfo{{ item.pk }}">
+                            More Info
+                            </button>
+                            <button type="button" class="btn btn-outline-success"
+                                data-toggle="modal" data-target="#Modal-PurchaseConfirm{{item.pk}}">
+                            Purchase this Item
+                            </button>
+                    </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
